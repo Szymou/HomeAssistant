@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.java.szymou.dao.EventsMapper">
+  <resultMap id="BaseResultMap" type="com.java.szymou.bean.Events">
+    <id column="event_id" jdbcType="INTEGER" property="eventId" />
+    <result column="event_type" jdbcType="VARCHAR" property="eventType" />
+    <result column="origin" jdbcType="VARCHAR" property="origin" />
+    <result column="time_fired" jdbcType="TIMESTAMP" property="timeFired" />
+    <result column="created" jdbcType="TIMESTAMP" property="created" />
+    <result column="context_id" jdbcType="VARCHAR" property="contextId" />
+    <result column="context_user_id" jdbcType="VARCHAR" property="contextUserId" />
+    <result column="event_data" jdbcType="LONGVARCHAR" property="eventData" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from events
+    where event_id = #{eventId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.java.szymou.bean.Events">
+    insert into events (event_id, event_type, origin, 
+      time_fired, created, context_id, 
+      context_user_id, event_data)
+    values (#{eventId,jdbcType=INTEGER}, #{eventType,jdbcType=VARCHAR}, #{origin,jdbcType=VARCHAR}, 
+      #{timeFired,jdbcType=TIMESTAMP}, #{created,jdbcType=TIMESTAMP}, #{contextId,jdbcType=VARCHAR}, 
+      #{contextUserId,jdbcType=VARCHAR}, #{eventData,jdbcType=LONGVARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.java.szymou.bean.Events">
+    update events
+    set event_type = #{eventType,jdbcType=VARCHAR},
+      origin = #{origin,jdbcType=VARCHAR},
+      time_fired = #{timeFired,jdbcType=TIMESTAMP},
+      created = #{created,jdbcType=TIMESTAMP},
+      context_id = #{contextId,jdbcType=VARCHAR},
+      context_user_id = #{contextUserId,jdbcType=VARCHAR},
+      event_data = #{eventData,jdbcType=LONGVARCHAR}
+    where event_id = #{eventId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select event_id, event_type, origin, time_fired, created, context_id, context_user_id, 
+    event_data
+    from events
+    where event_id = #{eventId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select event_id, event_type, origin, time_fired, created, context_id, context_user_id, 
+    event_data
+    from events
+  </select>
+</mapper>

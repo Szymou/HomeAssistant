@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.java.szymou.dao.RecorderRunMapper">
+  <resultMap id="BaseResultMap" type="com.java.szymou.bean.RecorderRun">
+    <id column="run_id" jdbcType="INTEGER" property="runId" />
+    <result column="start" jdbcType="TIMESTAMP" property="start" />
+    <result column="end" jdbcType="TIMESTAMP" property="end" />
+    <result column="closed_incorrect" jdbcType="BIT" property="closedIncorrect" />
+    <result column="created" jdbcType="TIMESTAMP" property="created" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from recorder_runs
+    where run_id = #{runId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.java.szymou.bean.RecorderRun">
+    insert into recorder_runs (run_id, start, end, 
+      closed_incorrect, created)
+    values (#{runId,jdbcType=INTEGER}, #{start,jdbcType=TIMESTAMP}, #{end,jdbcType=TIMESTAMP}, 
+      #{closedIncorrect,jdbcType=BIT}, #{created,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.java.szymou.bean.RecorderRun">
+    update recorder_runs
+    set start = #{start,jdbcType=TIMESTAMP},
+      end = #{end,jdbcType=TIMESTAMP},
+      closed_incorrect = #{closedIncorrect,jdbcType=BIT},
+      created = #{created,jdbcType=TIMESTAMP}
+    where run_id = #{runId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select run_id, start, end, closed_incorrect, created
+    from recorder_runs
+    where run_id = #{runId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select run_id, start, end, closed_incorrect, created
+    from recorder_runs
+  </select>
+</mapper>
