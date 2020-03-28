@@ -9,4 +9,7 @@
     <typeAliases>
         <package name="com.java.szymou.bean"/>
     </typeAliases>
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageInterceptor"/>
+    </plugins>
 </configuration>

@@ -37,6 +37,12 @@
 <!--        扫描所有dao接口的实现，加入到ioc容器中-->
         <property name="basePackage" value="com.java.szymou.dao"/>
     </bean>
+
+<!--    配置一个可以执行批量的sqlSession-->
+    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
+        <constructor-arg name="executorType" value="BATCH"/>
+    </bean>
 <!--===========================================================================================-->
 
 <!--=======================================事务控制的配置（十分重要）=======================================-->
